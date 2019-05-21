@@ -1,5 +1,28 @@
 import axios from "axios";
 
+async function signIn(email, password){
+    return axios({
+        url: "/graphql",
+        method: "post",
+        data: {
+            query: `
+                mutation{
+                    signInUser(
+                        email:{
+                        email: "${email}"
+                        password:"${password}"
+                        }
+                    ){
+                    user{
+                        id
+                    }
+                    token 
+                    }
+                }              
+            `
+        }
+    })
+}
 async function signUp(username, email, password) {
     return axios({
         url: "/graphql",
@@ -26,4 +49,4 @@ async function signUp(username, email, password) {
     })
 }
 
-export { signUp }
+export { signUp, signIn }

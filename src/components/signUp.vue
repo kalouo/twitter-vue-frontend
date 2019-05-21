@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { signUp } from "../api_calls";
+import { signUp } from "../graphQL";
 import axios from "axios";
 export default {
   data: () => ({

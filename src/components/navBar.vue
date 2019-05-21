@@ -11,6 +11,7 @@
 
 <script>
 import axios from "axios";
+import { signIn } from "../graphQL";
 export default {
   data: () => ({
     email: "",
@@ -18,13 +19,8 @@ export default {
   }),
   methods: {
     handleClick() {
-      console.log(this.email, this.password);
-      axios
-        .post("/auth/login", {
-          email: this.email,
-          password: this.password
-        })
-        .then(res => console.log(res.data.token))
+      signIn(this.email, this.password)
+        .then(res => console.log(res))
         .catch(() => alert("Wrong user name or password."));
     }
   }
