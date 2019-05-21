@@ -17,7 +17,7 @@
             required
           ></v-text-field>
         </v-flex>
-        <v-btn class="white--text" color="blue" @click="signUp">Sign Up</v-btn>
+        <v-btn class="white--text" color="blue" @click="handleClick">Sign Up</v-btn>
       </v-layout>
     </v-card>
   </v-form>
@@ -48,7 +48,7 @@ export default {
     ]
   }),
   methods: {
-    signUp() {
+    handleClick() {
       if (this.valid) {
         signUp(this.username, this.email, this.password)
           .then(res => console.log(res))
