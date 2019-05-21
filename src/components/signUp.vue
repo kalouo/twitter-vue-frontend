@@ -1,29 +1,30 @@
 <template>
   <v-form v-model="valid">
-      <v-card class="text-xs-center pl-5 pr-5 pt-3 pb-5 mt-5 mr-5 ml-5" max-width="500">
-        <v-layout column>
-          <v-flex xs12 md4>
-            <v-text-field v-model="username" :rules="nameRules" label="Username" required></v-text-field>
-          </v-flex>
-          <v-flex xs12 md4>
-            <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-          </v-flex>
-          <v-flex xs12 md4>
-            <v-text-field
-              v-model="password"
-              :rules="passwordRules"
-              type="password"
-              label="Password"
-              required
-            ></v-text-field>
-          </v-flex>
-          <v-btn class="white--text" color="blue" @click="handleClick">Sign Up</v-btn>
-        </v-layout>
-      </v-card>
+    <v-card class="text-xs-center pl-5 pr-5 pt-3 pb-5 mt-5 mr-5 ml-5" max-width="500">
+      <v-layout column>
+        <v-flex xs12 md4>
+          <v-text-field v-model="username" :rules="nameRules" label="Username" required></v-text-field>
+        </v-flex>
+        <v-flex xs12 md4>
+          <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+        </v-flex>
+        <v-flex xs12 md4>
+          <v-text-field
+            v-model="password"
+            :rules="passwordRules"
+            type="password"
+            label="Password"
+            required
+          ></v-text-field>
+        </v-flex>
+        <v-btn class="white--text" color="blue" @click="signUp">Sign Up</v-btn>
+      </v-layout>
+    </v-card>
   </v-form>
 </template>
 
 <script>
+import { signUp } from "../api_calls";
 import axios from "axios";
 export default {
   data: () => ({
@@ -47,17 +48,11 @@ export default {
     ]
   }),
   methods: {
-    handleClick() {
+    signUp() {
       if (this.valid) {
-        axios
-          .post("/users", {
-            username: this.username,
-            email: this.email,
-            password: this.password,
-            password_confirmation: this.password
-          })
+        signUp(this.username, this.email, this.password)
           .then(res => console.log(res))
-          .catch((error) => console.log("Server Error:", error.response));
+          .catch(err => console.log(err));
       } else {
         console.log("Inputs are not valid.");
       }
