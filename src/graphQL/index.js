@@ -49,4 +49,25 @@ async function signUp(username, email, password) {
     })
 }
 
-export { signUp, signIn }
+async function createTweet(tweet) {
+    return axios({
+        url: "/graphql",
+        method: "post",
+        data: {
+            query: `
+            mutation{
+                createTweet(content:"${tweet}"){
+                  id,
+                  content,
+                  postedBy{
+                    id
+                    username
+                  }
+                }
+              }
+            `
+        }
+    })
+}
+
+export { signUp, signIn, createTweet }
