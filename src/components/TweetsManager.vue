@@ -8,7 +8,7 @@
 </template>
 <script>
 import { NewTweet, Tweet, TweetsHeader } from ".";
-import {} from "../graphQL";
+import { getUserTweets } from "../graphQL";
 export default {
   components: {
     NewTweet,
@@ -16,7 +16,12 @@ export default {
     TweetsHeader
   },
   data: () => ({}),
-  methods: {}
+  methods: {},
+  mounted() {
+    getUserTweets()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
 };
 </script>
 <style scoped>

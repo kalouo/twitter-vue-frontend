@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function signIn(email, password){
+async function signIn(email, password) {
     return axios({
         url: "/graphql",
         method: "post",
@@ -70,4 +70,25 @@ async function createTweet(tweet) {
     })
 }
 
-export { signUp, signIn, createTweet }
+async function getUserTweets() {
+    return axios({
+        url: "graphql",
+        method: "post",
+        data: {
+            query: `
+            {currentUserTweets{
+                id
+                content
+                postedBy{
+                  id
+                  username
+                }
+                createdAt
+                  }
+              }    
+            `
+        }
+    })
+}
+
+export { createTweet, getUserTweets, signUp, signIn }
