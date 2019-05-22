@@ -16,7 +16,7 @@
   </v-form>
 </template>
 <script>
-import { createTweet } from "../graphQL";
+import { createTweet, getUserTweets } from "../graphQL";
 export default {
   components: {},
   data: () => ({
@@ -27,9 +27,15 @@ export default {
     ]
   }),
   methods: {
+    updateTweets() {
+      console.log("here");
+      this.$emit("update-tweets");
+    },
     handleClick() {
       createTweet(this.tweet)
-        .then(res => console.log(res))
+        .then(() => {
+          this.updateTweets();
+        })
         .catch(err => console.log(err));
     }
   }

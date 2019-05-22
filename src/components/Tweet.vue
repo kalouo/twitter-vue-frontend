@@ -7,9 +7,12 @@
             <v-layout>
               <img src="../assets/logo.png" height="40px" width="40px">
               <v-layout class="ml-5" column>
-                <div class="headline mb-0">User</div>
-                <div class="mb-1">Timestamp</div>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                <div class="headline mb-0">{{this.user}}</div>
+                <div class="mb-1">
+                  {{moment(this.createdAt)
+                  }}
+                </div>
+                <div>{{this.content}}</div>
               </v-layout>
             </v-layout>
           </div>
@@ -21,10 +24,16 @@
 
 <script>
 import {} from "../graphQL";
+import moment from "moment";
 export default {
-  props: [],
+  props: ["content", "createdAt", "user"],
   data: () => ({}),
-  methods: {}
+  methods: {
+    moment: function(input) {
+      const time = new Date(input).getTime();
+      return moment(time).fromNow();
+    }
+  }
 };
 </script>
 <style scoped>

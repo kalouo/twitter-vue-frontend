@@ -1,9 +1,14 @@
 <template>
   <div>
-    <NewTweet/>
+    <NewTweet v-on:update-tweets="fetchUserTweets"/>
     <TweetsHeader/>
-    <Tweet/>
-    <Tweet/>
+    <Tweet
+      v-for="tweet in currentUserTweets"
+      v-bind:key="tweet.id"
+      :content="tweet.content"
+      :createdAt="tweet.createdAt"
+      :user="tweet.postedBy.username"
+    />
   </div>
 </template>
 <script>
@@ -15,12 +20,20 @@ export default {
     Tweet,
     TweetsHeader
   },
-  data: () => ({}),
-  methods: {},
+  data: () => ({
+    currentUserTweets: []
+  }),
+  methods: {
+    fetchUserTweets() {
+      getUserTweets()
+        .then(res => {
+          this.currentUserTweets = res.data.data.currentUserTweets.reverse();
+        })
+        .catch(err => console.log(err));
+    }
+  },
   mounted() {
-    getUserTweets()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    this.fetchUserTweets();
   }
 };
 </script>
