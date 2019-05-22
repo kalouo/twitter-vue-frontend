@@ -25,7 +25,6 @@
 
 <script>
 import { signUp } from "../graphQL";
-import axios from "axios";
 export default {
   data: () => ({
     valid: false,
