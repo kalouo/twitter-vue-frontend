@@ -1,19 +1,21 @@
 <template>
   <div id="app">
     <NavBar/>
-    <SignUp/>
+    <v-flex row>
+      <TweetsManager/>
+    </v-flex>
   </div>
 </template>
 
 <script>
-import SignUp from "./components/signUp.vue";
-import NavBar from "./components/navBar.vue";
+import { SignUp, NavBar, TweetsManager } from "./components";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     SignUp,
-    NavBar
+    NavBar,
+    TweetsManager
   }
 };
 </script>
