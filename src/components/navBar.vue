@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { signIn } from "../graphQL";
 export default {
   data: () => ({

@@ -8,12 +8,11 @@
 </template>
 
 <script>
-import { SignUp, NavBar, TweetsManager } from "./components";
+import { NavBar, TweetsManager } from "./components";
 
 export default {
   name: "App",
   components: {
-    SignUp,
     NavBar,
     TweetsManager
   }
