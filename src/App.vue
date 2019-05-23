@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavBar/>
+    <NavBar :loggedIn="this.loggedIn"/>
     <v-flex row>
       <TweetsManager/>
     </v-flex>
@@ -15,6 +15,14 @@ export default {
   components: {
     NavBar,
     TweetsManager
+  },
+  data: () => ({
+    loggedIn: false
+  }),
+  methods: {
+    toggleLoggedIn(bool) {
+      this.loggedIn = bool;
+    }
   }
 };
 </script>
