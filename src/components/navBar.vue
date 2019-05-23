@@ -1,28 +1,22 @@
 <template>
   <v-toolbar color="blue">
     <v-spacer></v-spacer>
-    <v-toolbar-items>
-      <v-text-field prepend-icon="account_circle" v-model="email" label="Email"></v-text-field>
-      <v-text-field prepend-icon="lock" type="password" v-model="password" label="Password"></v-text-field>
-    </v-toolbar-items>
-    <v-btn @click="handleClick">Log In</v-btn>
+    <v-layout row justify-end>
+      <v-flex shrink>
+        <logIn/>
+      </v-flex>
+    </v-layout>
   </v-toolbar>
 </template>
 
 <script>
 import { signIn } from "../graphQL";
+import { logIn } from "./";
 export default {
-  data: () => ({
-    email: "",
-    password: ""
-  }),
-  methods: {
-    handleClick() {
-      signIn(this.email, this.password)
-        .then(res => console.log(res))
-        .catch(() => alert("Wrong user name or password."));
-    }
-  }
+  props: ["loggedIn"],
+  components: { logIn },
+  data: () => ({}),
+  methods: {}
 };
 </script>
 
