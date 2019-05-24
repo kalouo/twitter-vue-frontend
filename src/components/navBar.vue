@@ -1,30 +1,32 @@
 <template>
   <v-toolbar color="blue">
-    <v-spacer></v-spacer>
     <v-layout row justify-end>
       <v-flex shrink>
-        <logIn/>
+        <LogInView v-on:toggle-logged-in="toggleLoggedIn" v-if="!this.loggedIn"/>
+        <LogOutView v-if="this.loggedIn"/>
       </v-flex>
     </v-layout>
   </v-toolbar>
 </template>
 
 <script>
-import { signIn } from "../graphQL";
-import { logIn } from "./";
+import {} from "../graphQL";
+import LogInView from "./LogInView";
+import LogOutView from "./LogOutView";
 export default {
+  name: "NavBar",
+  components: { LogInView, LogOutView },
   props: ["loggedIn"],
-  components: { logIn },
   data: () => ({}),
-  methods: {}
+  methods: {
+    toggleLoggedIn(bool) {
+      this.$emit("toggle-logged-in", true);
+    }
+  }
 };
 </script>
 
 
 
 <style scoped>
-.v-btn {
-  border-radius: 60px;
-  margin-bottom: 16px;
-}
 </style>
