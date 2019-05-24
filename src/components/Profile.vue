@@ -26,6 +26,7 @@ export default {
       if (this.editingLocked) {
         this.toggleEditButtonStatus();
       } else {
+        //NOTE PROBLEM REGARDING DIRECT MUTATION OF PROP
         updateBio(this.bio)
           .then(res => {
             console.log(res);
