@@ -107,4 +107,30 @@ function getCurrentUser() {
     }
   });
 }
-export { createTweet, getCurrentUser, getUserTweets, signUp, signIn };
+
+function updateBio(bio) {
+  return axios({
+    url: "/graphql",
+    method: "post",
+    data: {
+      query: `
+        mutation{
+            modifyBio(bio:"${bio}"){
+                user{
+                    bio
+                }
+            }
+        }            
+        `
+    }
+  });
+}
+
+export {
+  createTweet,
+  getCurrentUser,
+  getUserTweets,
+  signUp,
+  signIn,
+  updateBio
+};

@@ -27,7 +27,6 @@ export default {
     fetchUserTweets() {
       getUserTweets()
         .then(res => {
-          console.log(res.headers);
           this.currentUserTweets = res.data.data.currentUserTweets.reverse();
         })
         .catch(err => console.log(err));

@@ -6,32 +6,36 @@
     <v-flex xs12 sm6 offset-sm3 class="mt-5 text-xs-right">
       <v-layout row>
         <img class="mr-5 mt-1" src="../assets/avatar.jpg" height="130px" width="130px">
-        <v-textarea
-          :disabled="editButtonBool"
-          outline
-          name="input-7-4"
-          label="Bio"
-          :value="this.bio"
-        ></v-textarea>
+        <v-textarea :disabled="editingLocked" outline name="input-7-4" label="Bio" v-model="bio"></v-textarea>
         <v-btn class="white--text mt-0" color="green" @click="handleClick">{{editButton}}</v-btn>
       </v-layout>
     </v-flex>
   </div>
 </template>
 <script>
+import { updateBio } from "../graphQL";
 export default {
   components: {},
   props: ["bio"],
   data: () => ({
-    editButtonBool: true,
+    editingLocked: true,
     editButton: "Edit"
   }),
   methods: {
     handleClick() {
-      this.toggleEditButtonStatus();
+      if (this.editingLocked) {
+        this.toggleEditButtonStatus();
+      } else {
+        updateBio(this.bio)
+          .then(res => {
+            console.log(res);
+            this.toggleEditButtonStatus();
+          })
+          .catch(err => console.log(err));
+      }
     },
     toggleEditButtonStatus() {
-      this.editButtonBool = !this.editButtonBool;
+      this.editingLocked = !this.editingLocked;
       this.editButton = this.editButton === "Edit" ? "Save" : "Edit";
     }
   },

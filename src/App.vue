@@ -24,7 +24,7 @@ export default {
   },
   data: () => ({
     loggedIn: false,
-    currentUser: null
+    currentUser: { bio: "" }
   }),
   methods: {
     toggleLoggedIn(bool) {
@@ -40,7 +40,7 @@ export default {
         });
     }
   },
-  mounted() {
+  beforeMount() {
     this.getCurrentUserInfo();
   }
 };
