@@ -11,7 +11,7 @@
           outline
           name="input-7-4"
           label="Bio"
-          value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+          :value="this.bio"
         ></v-textarea>
         <v-btn class="white--text mt-0" color="green" @click="handleClick">{{editButton}}</v-btn>
       </v-layout>
@@ -21,6 +21,7 @@
 <script>
 export default {
   components: {},
+  props: ["bio"],
   data: () => ({
     editButtonBool: true,
     editButton: "Edit"

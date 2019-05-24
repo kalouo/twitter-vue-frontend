@@ -3,7 +3,7 @@
     <NavBar v-on:toggle-logged-in="toggleLoggedIn" :loggedIn="this.loggedIn"/>
     <v-layout column>
       <v-flex xs12>
-        <Profile/>
+        <Profile :bio="this.currentUser.bio"/>
       </v-flex>
       <v-flex xs12>
         <TweetsManager/>
@@ -14,7 +14,7 @@
 
 <script>
 import { NavBar, TweetsManager, Profile } from "./components";
-
+import { getCurrentUser } from "./graphQL";
 export default {
   name: "App",
   components: {
@@ -23,15 +23,29 @@ export default {
     TweetsManager
   },
   data: () => ({
-    loggedIn: false
+    loggedIn: false,
+    currentUser: null
   }),
   methods: {
     toggleLoggedIn(bool) {
       this.loggedIn = bool;
+    },
+    getCurrentUserInfo() {
+      getCurrentUser()
+        .then(res => {
+          this.currentUser = res.data.data.getCurrentUser;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
+  },
+  mounted() {
+    this.getCurrentUserInfo();
   }
 };
 </script>
 
 <style scoped>
 </style>
+

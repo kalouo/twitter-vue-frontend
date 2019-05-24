@@ -1,11 +1,11 @@
 import axios from "axios";
 
-async function signIn(email, password) {
-    return axios({
-        url: "/graphql",
-        method: "post",
-        data: {
-            query: `
+function signIn(email, password) {
+  return axios({
+    url: "/graphql",
+    method: "post",
+    data: {
+      query: `
                 mutation{
                     signInUser(
                         email:{
@@ -20,15 +20,15 @@ async function signIn(email, password) {
                     }
                 }              
             `
-        }
-    })
+    }
+  });
 }
-async function signUp(username, email, password) {
-    return axios({
-        url: "/graphql",
-        method: "post",
-        data: {
-            query: `
+function signUp(username, email, password) {
+  return axios({
+    url: "/graphql",
+    method: "post",
+    data: {
+      query: `
                 mutation{
                     createUser(
                     username: "${username}",
@@ -45,16 +45,16 @@ async function signUp(username, email, password) {
                     }
                 }
             `
-        }
-    })
+    }
+  });
 }
 
-async function createTweet(tweet) {
-    return axios({
-        url: "/graphql",
-        method: "post",
-        data: {
-            query: `
+function createTweet(tweet) {
+  return axios({
+    url: "/graphql",
+    method: "post",
+    data: {
+      query: `
             mutation{
                 createTweet(content:"${tweet}"){
                   id,
@@ -66,16 +66,16 @@ async function createTweet(tweet) {
                 }
               }
             `
-        }
-    })
+    }
+  });
 }
 
-async function getUserTweets() {
-    return axios({
-        url: "graphql",
-        method: "post",
-        data: {
-            query: `
+function getUserTweets() {
+  return axios({
+    url: "graphql",
+    method: "post",
+    data: {
+      query: `
             {currentUserTweets{
                 id
                 content
@@ -87,8 +87,24 @@ async function getUserTweets() {
                   }
               }    
             `
-        }
-    })
+    }
+  });
 }
 
-export { createTweet, getUserTweets, signUp, signIn }
+function getCurrentUser() {
+  return axios({
+    url: "graphql",
+    method: "post",
+    data: {
+      query: `
+                {getCurrentUser{
+                    id
+                    username
+                    bio
+                    email
+                }}
+            `
+    }
+  });
+}
+export { createTweet, getCurrentUser, getUserTweets, signUp, signIn };
