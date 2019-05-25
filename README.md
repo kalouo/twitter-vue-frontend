@@ -1,29 +1,17 @@
-# twitter-frontend
+# Twitter Client Built with VueJS
 
-## Project setup
+## 1. Install Dependencies
+
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 2. Start The Development Server
+
 ```
-yarn run serve
+yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+This will render the page on http://localhost:8080
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Note that the Ruby server needs to be up and running for requests to be routed. The corresponding repo is [here](https://github.com/okalouti/twitter-ruby-backend).
