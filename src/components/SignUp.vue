@@ -53,8 +53,8 @@ export default {
     handleClick() {
       if (this.valid) {
         signUp(this.username, this.email, this.password)
-          .then(res => console.log(res))
-          .catch(err => console.log(err));
+          .then(res => alert("You have been registered. Please log in"))
+          .catch(err => alert("Error", err.message));
       } else {
         console.log("Inputs are not valid.");
       }
