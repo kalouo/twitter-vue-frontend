@@ -7,7 +7,10 @@
         <Profile :bio="this.currentUser.bio"/>
       </v-flex>
       <v-flex xs12>
-        <TweetsManager/>
+        <TweetsManager
+          :currentUserTweets="this.currentUserTweets"
+          v-on:fetch-user-tweets="fetchUserTweets"
+        />
       </v-flex>
     </v-layout>
   </div>
@@ -17,7 +20,7 @@
 
 <script>
 import { NavBar, TweetsManager, Profile, SignUp } from "./components";
-import { getCurrentUser } from "./graphQL";
+import { getCurrentUser, getUserTweets } from "./graphQL";
 export default {
   name: "App",
   components: {
@@ -28,26 +31,40 @@ export default {
   },
   data: () => ({
     loggedIn: false,
-    currentUser: { bio: "" }
+    currentUser: {},
+    currentUserTweets: []
   }),
   methods: {
     toggleLoggedIn(bool) {
-      this.loggedIn = bool;
+      if (bool) {
+        this.getCurrentUserInfo()
+          .then(() => this.fetchUserTweets())
+          .then(() => {
+            this.loggedIn = bool;
+          });
+      } else if (!bool) {
+        this.loggedIn = bool;
+        this.currentUser = {};
+        this.currentUserTweets = [];
+      }
     },
-    getCurrentUserInfo() {
+    async getCurrentUserInfo() {
       getCurrentUser()
         .then(res => {
-          console.log(res);
           this.currentUser = res.data.data.getCurrentUser;
         })
-        .catch(err => {
-          console.log(err);
-        });
+        .catch(err => {});
+    },
+    async fetchUserTweets() {
+      getUserTweets()
+        .then(res => {
+          this.currentUserTweets = res.data.data.currentUserTweets.reverse();
+        })
+        .catch(err => console.log(err));
     }
   },
-  beforeMount() {
-    if (localStorage.getItem("Authorization")) this.loggedIn = true;
-    this.getCurrentUserInfo();
+  mounted() {
+    if (localStorage.getItem("Authorization")) this.toggleLoggedIn(true);
   }
 };
 </script>

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {} from "../graphQL";
+import { signOut } from "../graphQL";
 export default {
   name: "LogOut",
   props: [],
@@ -14,6 +14,7 @@ export default {
     handleClick() {
       localStorage.removeItem("Authorization");
       this.$emit("toggle-logged-in");
+      signOut().then(res => console.log(res));
     }
   }
 };

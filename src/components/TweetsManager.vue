@@ -20,21 +20,14 @@ export default {
     Tweet,
     TweetsHeader
   },
-  data: () => ({
-    currentUserTweets: []
-  }),
+  props: ["currentUserTweets"],
+  data: () => ({}),
   methods: {
     fetchUserTweets() {
-      getUserTweets()
-        .then(res => {
-          this.currentUserTweets = res.data.data.currentUserTweets.reverse();
-        })
-        .catch(err => console.log(err));
+      this.$emit("fetch-user-tweets");
     }
   },
-  mounted() {
-    this.fetchUserTweets();
-  }
+  mounted() {}
 };
 </script>
 <style scoped>
