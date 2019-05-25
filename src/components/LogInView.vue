@@ -19,7 +19,7 @@ export default {
     handleClick() {
       signIn(this.email, this.password)
         .then(res => {
-          console.log(res);
+          localStorage.setItem("Authorization", res.data.data.signInUser.token);
           this.$emit("toggle-logged-in", true);
         })
         .catch(() => alert("Wrong user name or password."));

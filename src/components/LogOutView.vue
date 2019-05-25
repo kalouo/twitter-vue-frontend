@@ -12,7 +12,8 @@ export default {
   data: () => ({}),
   methods: {
     handleClick() {
-      console.log("Log Out");
+      localStorage.removeItem("Authorization");
+      this.$emit("toggle-logged-in");
     }
   }
 };

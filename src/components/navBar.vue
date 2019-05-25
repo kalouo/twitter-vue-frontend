@@ -2,8 +2,8 @@
   <v-toolbar color="blue">
     <v-layout row justify-end>
       <v-flex shrink>
-        <LogInView v-on:toggle-logged-in="toggleLoggedIn" v-if="!this.loggedIn"/>
-        <LogOutView v-if="this.loggedIn"/>
+        <LogInView v-on:toggle-logged-in="toggleLoggedIn(true)" v-if="!this.loggedIn"/>
+        <LogOutView v-on:toggle-logged-in="toggleLoggedIn(false)" v-if="this.loggedIn"/>
       </v-flex>
     </v-layout>
   </v-toolbar>
@@ -20,7 +20,7 @@ export default {
   data: () => ({}),
   methods: {
     toggleLoggedIn(bool) {
-      this.$emit("toggle-logged-in", true);
+      this.$emit("toggle-logged-in", bool);
     }
   }
 };

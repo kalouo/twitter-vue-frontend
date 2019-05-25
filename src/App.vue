@@ -1,16 +1,15 @@
 <template>
   <div id="app">
     <NavBar v-on:toggle-logged-in="toggleLoggedIn" :loggedIn="this.loggedIn"/>
-    <SignUp/>
-
-    <!-- <v-layout column>
+    <SignUp v-if="!loggedIn"/>
+    <v-layout v-if="loggedIn" column>
       <v-flex xs12>
         <Profile :bio="this.currentUser.bio"/>
       </v-flex>
       <v-flex xs12>
         <TweetsManager/>
       </v-flex>
-    </v-layout>-->
+    </v-layout>
   </div>
 </template>
 
@@ -48,7 +47,6 @@ export default {
   },
   beforeMount() {
     if (localStorage.getItem("Authorization")) this.loggedIn = true;
-    console.log(this.loggedIn);
     this.getCurrentUserInfo();
   }
 };
