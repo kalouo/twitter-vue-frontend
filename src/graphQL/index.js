@@ -1,81 +1,91 @@
 import axios from "axios";
 
+const baseRequest = {
+  url: "/graphql",
+  method: "post"
+};
+
+const baseRequestWithAuth = {
+  ...baseRequest,
+  headers: {
+    Authorization: localStorage.getItem("Authorization")
+  }
+};
+
 function signIn(email, password) {
-  return axios({
-    url: "/graphql",
-    method: "post",
-    data: {
-      query: `
-                mutation{
-                    signInUser(
-                        email:{
-                        email: "${email}"
-                        password:"${password}"
-                        }
-                    ){
-                    user{
-                        id
-                    }
-                    token 
-                    }
-                }              
-            `
-    }
-  });
-}
-function signUp(username, email, password) {
-  return axios({
-    url: "/graphql",
-    method: "post",
-    data: {
-      query: `
-                mutation{
-                    createUser(
-                    username: "${username}",
-                    authProvider:{
-                        email:{
-                        email: "${email}"
-                        password: "${password}"
-                        }
-                    }
-                    ){
-                        id
-                        email
-                        username
-                    }
+  const data = {
+    query: `mutation{
+              signInUser(
+                email:{
+                email: "${email}"
+                password:"${password}"
                 }
-            `
-    }
-  });
+              ){
+                user{
+                    id
+                    }
+                token 
+                }
+              }`
+  };
+  return axios({ ...baseRequest, data });
+}
+
+function signOut() {
+  const data = {
+    query: `mutation{
+      signOutUser{
+        user{
+          id
+        }
+        token
+      }
+    }`
+  };
+
+  return axios({ ...baseRequestWithAuth, data });
+}
+
+function signUp(username, email, password) {
+  const data = {
+    query: `mutation{
+              createUser(
+              username: "${username}",
+              authProvider:{
+                  email:{
+                  email: "${email}"
+                  password: "${password}"
+                  }
+                }
+              ){
+                  id
+                  email
+                  username
+              }
+          }`
+  };
+  return axios({ ...baseRequest, data });
 }
 
 function createTweet(tweet) {
-  return axios({
-    url: "/graphql",
-    method: "post",
-    data: {
-      query: `
-            mutation{
-                createTweet(content:"${tweet}"){
-                  id,
-                  content,
-                  postedBy{
-                    id
-                    username
-                  }
+  const data = {
+    query: `mutation{
+              createTweet(content:"${tweet}"){
+                id,
+                content,
+                postedBy{
+                  id
+                  username
                 }
               }
-            `
-    }
-  });
+            }`
+  };
+  return axios({ ...baseRequestWithAuth, data });
 }
 
 function getUserTweets() {
-  return axios({
-    url: "graphql",
-    method: "post",
-    data: {
-      query: `
+  const data = {
+    query: `
             {currentUserTweets{
                 id
                 content
@@ -87,47 +97,33 @@ function getUserTweets() {
                   }
               }    
             `
-    }
-  });
+  };
+  return axios({ ...baseRequestWithAuth, data });
 }
 
 function getCurrentUser() {
-  return axios({
-    url: "graphql",
-    method: "post",
-    // headers: {
-    //   Authorization:
-    //     "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NTg3NzUwNDF9.BKLLwdrqCmWLXPFUTp6WtjTKn-H5rUvaVylyY6hXkDs"
-    // },
-    data: {
-      query: `
-                {getCurrentUser{
-                    id
-                    username
-                    bio
-                    email
-                }}
-            `
-    }
-  });
+  const data = {
+    query: `{getCurrentUser{
+              id
+              username
+              bio
+              email
+          }}`
+  };
+  return axios({ ...baseRequestWithAuth, data });
 }
 
 function updateBio(bio) {
-  return axios({
-    url: "/graphql",
-    method: "post",
-    data: {
-      query: `
-        mutation{
-            modifyBio(bio:"${bio}"){
+  const data = {
+    query: `mutation{
+              updateBio(bio:"${bio}"){
                 user{
-                    bio
+                  bio
                 }
-            }
-        }            
-        `
-    }
-  });
+              }
+            }`
+  };
+  return axios({ ...baseRequestWithAuth, data });
 }
 
 export {
@@ -136,5 +132,6 @@ export {
   getUserTweets,
   signUp,
   signIn,
+  signOut,
   updateBio
 };
