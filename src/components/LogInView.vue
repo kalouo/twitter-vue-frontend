@@ -19,6 +19,7 @@ export default {
     handleClick() {
       signIn(this.email, this.password)
         .then(res => {
+          console.log(res);
           this.$emit("toggle-logged-in", true);
         })
         .catch(() => alert("Wrong user name or password."));

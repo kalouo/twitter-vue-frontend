@@ -1,32 +1,35 @@
 <template>
-  <v-form v-model="valid">
-    <v-card class="text-xs-center pl-5 pr-5 pt-3 pb-5 mt-5 mr-5 ml-5" max-width="500">
-      <v-layout column>
-        <v-flex xs12 md4>
-          <v-text-field v-model="username" :rules="nameRules" label="Username" required></v-text-field>
-        </v-flex>
-        <v-flex xs12 md4>
-          <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-        </v-flex>
-        <v-flex xs12 md4>
-          <v-text-field
-            v-model="password"
-            :rules="passwordRules"
-            type="password"
-            label="Password"
-            required
-          ></v-text-field>
-        </v-flex>
-        <v-btn class="white--text" color="blue" @click="handleClick">Sign Up</v-btn>
-      </v-layout>
-    </v-card>
-  </v-form>
+  <v-flex offset-sm3>
+    <v-form v-model="valid">
+      <v-card class="pl-5 pr-5 pt-3 pb-5 mt-5 mr-5 ml-5" max-width="500">
+        <v-layout column>
+          <v-flex xs12 md4>
+            <v-text-field v-model="username" :rules="nameRules" label="Username" required></v-text-field>
+          </v-flex>
+          <v-flex xs12 md4>
+            <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+          </v-flex>
+          <v-flex xs12 md4>
+            <v-text-field
+              v-model="password"
+              :rules="passwordRules"
+              type="password"
+              label="Password"
+              required
+            ></v-text-field>
+          </v-flex>
+          <v-btn class="white--text" color="blue" @click="handleClick">Sign Up</v-btn>
+        </v-layout>
+      </v-card>
+    </v-form>
+  </v-flex>
 </template>
 
 <script>
 import { signUp } from "../graphQL";
 export default {
   data: () => ({
+    name: "SignUp",
     valid: false,
     username: "",
     nameRules: [

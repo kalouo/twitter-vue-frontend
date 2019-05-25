@@ -95,6 +95,10 @@ function getCurrentUser() {
   return axios({
     url: "graphql",
     method: "post",
+    // headers: {
+    //   Authorization:
+    //     "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NTg3NzUwNDF9.BKLLwdrqCmWLXPFUTp6WtjTKn-H5rUvaVylyY6hXkDs"
+    // },
     data: {
       query: `
                 {getCurrentUser{
