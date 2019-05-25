@@ -1,18 +1,15 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import App from "./App.vue";
 
 //Styling
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 
-Vue.use(Vuetify,
-  {iconfont: 'md'});
+Vue.use(Vuetify, { iconfont: "md" });
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
-
-
+  render: h => h(App)
+}).$mount("#app");
