@@ -1,16 +1,20 @@
 import axios from "axios";
 
-const baseRequest = {
-  url: "/graphql",
-  method: "post"
-};
+function baseRequest() {
+  return {
+    url: "/graphql",
+    method: "post"
+  };
+}
 
-const baseRequestWithAuth = {
-  ...baseRequest,
-  headers: {
-    Authorization: localStorage.getItem("Authorization")
-  }
-};
+function baseRequestWithAuth() {
+  return {
+    ...baseRequest(),
+    headers: {
+      Authorization: localStorage.getItem("Authorization")
+    }
+  };
+}
 
 function signIn(email, password) {
   const data = {
@@ -28,22 +32,7 @@ function signIn(email, password) {
                 }
               }`
   };
-  return axios({ ...baseRequest, data });
-}
-
-function signOut() {
-  const data = {
-    query: `mutation{
-      signOutUser{
-        user{
-          id
-        }
-        token
-      }
-    }`
-  };
-
-  return axios({ ...baseRequestWithAuth, data });
+  return axios({ ...baseRequest(), data });
 }
 
 function signUp(username, email, password) {
@@ -64,7 +53,7 @@ function signUp(username, email, password) {
               }
           }`
   };
-  return axios({ ...baseRequest, data });
+  return axios({ ...baseRequest(), data });
 }
 
 function createTweet(tweet) {
@@ -80,7 +69,7 @@ function createTweet(tweet) {
               }
             }`
   };
-  return axios({ ...baseRequestWithAuth, data });
+  return axios({ ...baseRequestWithAuth(), data });
 }
 
 function getUserTweets() {
@@ -98,7 +87,7 @@ function getUserTweets() {
               }    
             `
   };
-  return axios({ ...baseRequestWithAuth, data });
+  return axios({ ...baseRequestWithAuth(), data });
 }
 
 function getCurrentUser() {
@@ -110,7 +99,7 @@ function getCurrentUser() {
               email
           }}`
   };
-  return axios({ ...baseRequestWithAuth, data });
+  return axios({ ...baseRequestWithAuth(), data });
 }
 
 function updateBio(bio) {
@@ -123,7 +112,7 @@ function updateBio(bio) {
               }
             }`
   };
-  return axios({ ...baseRequestWithAuth, data });
+  return axios({ ...baseRequestWithAuth(), data });
 }
 
 export {
@@ -132,6 +121,5 @@ export {
   getUserTweets,
   signUp,
   signIn,
-  signOut,
   updateBio
 };

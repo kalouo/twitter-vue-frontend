@@ -53,7 +53,9 @@ export default {
         .then(res => {
           this.currentUser = res.data.data.getCurrentUser;
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+        });
     },
     async fetchUserTweets() {
       getUserTweets()

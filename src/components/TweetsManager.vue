@@ -13,7 +13,7 @@
 </template>
 <script>
 import { NewTweet, Tweet, TweetsHeader } from ".";
-import { getUserTweets } from "../graphQL";
+import {} from "../graphQL";
 export default {
   components: {
     NewTweet,

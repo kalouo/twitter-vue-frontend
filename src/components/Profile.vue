@@ -29,7 +29,6 @@ export default {
         //NOTE PROBLEM REGARDING DIRECT MUTATION OF PROP
         updateBio(this.bio)
           .then(res => {
-            console.log(res);
             this.toggleEditButtonStatus();
           })
           .catch(err => console.log(err));

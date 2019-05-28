@@ -20,8 +20,8 @@ export default {
       signIn(this.email, this.password)
         .then(res => {
           localStorage.setItem("Authorization", res.data.data.signInUser.token);
-          this.$emit("toggle-logged-in", true);
         })
+        .then(() => this.$emit("toggle-logged-in", true))
         .catch(() => alert("Wrong user name or password."));
     }
   }
