@@ -9,7 +9,7 @@
     "pretty-quick": "pretty-quick"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "moment": "^2.24.0",
     "prettier": "^1.17.1",
